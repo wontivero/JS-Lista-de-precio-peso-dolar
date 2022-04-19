@@ -3,7 +3,7 @@ class Producto {
     constructor(codigo, nombre, costoDolar, ganancia) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.costoDolar = parseInt(costoDolar);
+        this.costoDolar = parseFloat(costoDolar);
         this.ganancia = ganancia;
         this.fecha = new Date()
     }
@@ -52,10 +52,10 @@ async function cargarTabla() {
         <td>${e.codigo}</td>
         <td>${e.nombre}</td>
         <td class="text-center">$${e.costoDolar}</td>
-        <td class="text-center">$${parseInt(e.costoDolar * dolarOficial)}</td>
+        <td class="text-center">$${parseFloat(e.costoDolar * dolarOficial)}</td>
         <td class="text-center">${e.ganancia + "%"}</td>
-        <td class="text-center table-success fw-bold">$${parseInt((e.costoDolar * ((e.ganancia*0.01)+1)))}</td>
-        <td class="text-center table-primary fw-bold">$${parseInt((e.costoDolar * ((e.ganancia*0.01)+1)) * dolarOficial)}</td>
+        <td class="text-center table-success fw-bold">$${parseFloat((e.costoDolar * ((e.ganancia*0.01)+1))).toFixed(2)}</td>
+        <td class="text-center table-primary fw-bold">$${parseFloat((e.costoDolar * ((e.ganancia*0.01)+1)) * dolarOficial).toFixed(2)}</td>
         </tr>
     `
     });
@@ -133,7 +133,7 @@ async function valorDolar() {
 async function dolarToPeso() {
     const dolar = await valorDolar()
     if (txtDolar.value > 0) {
-        txtPeso.value = (parseInt(txtDolar.value) * dolar).toFixed(2)
+        txtPeso.value = (parseFloat(txtDolar.value) * dolar).toFixed(2)
     } else {
         txtPeso.value = ""
     }
@@ -141,7 +141,7 @@ async function dolarToPeso() {
 async function pesoToDolar() {
     const dolar = await valorDolar()
     if (txtPeso.value > 0) {
-        txtDolar.value = (parseInt(txtPeso.value) / dolar).toFixed(2)
+        txtDolar.value = (parseFloat(txtPeso.value) / dolar).toFixed(2)
     } else {
         txtDolar.value = ""
     }
@@ -175,7 +175,9 @@ async function buscar() {
         costoDolar.value = producto.costoDolar
         costoPeso.value = (producto.costoDolar * dolar).toFixed(2)
         ganancia.value = producto.ganancia
+        calcularPrecioVenta()
         botonGuardar.disabled = true
+
     } else {
         nombre.value = ""
         costoDolar.value = ""
