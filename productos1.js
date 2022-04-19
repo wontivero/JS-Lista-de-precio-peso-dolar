@@ -226,11 +226,11 @@ let txtGanancia = document.getElementById("txtGanancia")
 let txtPVentaDolar = document.getElementById("txtPVentaDolar")
 let txtPVentaPeso = document.getElementById("txtPVentaPeso")
 
-txtDolar.addEventListener("keyup", dolarToPeso)
-txtPeso.addEventListener("keyup", pesoToDolar)
-txtDolar.addEventListener("keyup", calcularPrecioVenta)
-txtPeso.addEventListener("keyup", calcularPrecioVenta)
-txtGanancia.addEventListener("keyup", calcularPrecioVenta)
+txtDolar.addEventListener("input", dolarToPeso)
+txtPeso.addEventListener("input", pesoToDolar)
+txtDolar.addEventListener("input", calcularPrecioVenta)
+txtPeso.addEventListener("input", calcularPrecioVenta)
+txtGanancia.addEventListener("input", calcularPrecioVenta)
 
 
 leerJson()
@@ -238,7 +238,7 @@ fechaSesion()
 
 let botonGuardar = document.getElementById("btnGuardar")
 let txtCodigo = document.getElementById("txtCodigo")
-txtCodigo.addEventListener("keyup", buscar)
+txtCodigo.addEventListener("input", buscar)
 
 botonGuardar.addEventListener("click", guardar)
 
