@@ -52,7 +52,7 @@ async function cargarTabla() {
         <td>${e.codigo}</td>
         <td>${e.nombre}</td>
         <td class="text-center">$${e.costoDolar}</td>
-        <td class="text-center">$${parseFloat(e.costoDolar * dolarOficial)}</td>
+        <td class="text-center">$${parseFloat(e.costoDolar * dolarOficial).toFixed(2)}</td>
         <td class="text-center">${e.ganancia + "%"}</td>
         <td class="text-center table-success fw-bold">$${parseFloat((e.costoDolar * ((e.ganancia*0.01)+1))).toFixed(2)}</td>
         <td class="text-center table-primary fw-bold">$${parseFloat((e.costoDolar * ((e.ganancia*0.01)+1)) * dolarOficial).toFixed(2)}</td>
@@ -76,17 +76,22 @@ function agregarProducto() {
 
 
 function limpiarProductoHTML() {
-    const codigo = document.getElementById("txtCodigo")
+
     const nombre = document.getElementById("txtNombre")
     const costoDolar = document.getElementById("txtCostoDolar")
     const costoPeso = document.getElementById("txtCostoPeso")
     const ganancia = document.getElementById("txtGanancia")
+    const txtPVentaPeso = document.getElementById("txtPVentaPeso")
+    const txtPVentaDolar = document.getElementById("txtPVentaDolar")
+    const botonGuardar = document.getElementById("btnGuardar")
 
-    codigo.value = ""
     nombre.value = ""
     costoDolar.value = ""
     costoPeso.value = ""
     ganancia.value = ""
+    txtPVentaDolar.value = ""
+    txtPVentaPeso.value = ""
+    botonGuardar.disabled = false
 }
 
 
@@ -151,7 +156,7 @@ function calcularPrecioVenta() {
     if (txtGanancia.value > 0) {
         txtPVentaDolar.value = (txtDolar.value * ((txtGanancia.value * 0.01) + 1)).toFixed(2)
         txtPVentaPeso.value = (txtPeso.value * ((txtGanancia.value * 0.01) + 1)).toFixed(2)
-    }else{
+    } else {
         txtPVentaDolar.value = ""
         txtPVentaPeso.value = ""
     }
@@ -165,6 +170,8 @@ async function buscar() {
     const costoDolar = document.getElementById("txtCostoDolar")
     const costoPeso = document.getElementById("txtCostoPeso")
     const ganancia = document.getElementById("txtGanancia")
+    let txtPVentaDolar = document.getElementById("txtPVentaDolar")
+    let txtPVentaPeso = document.getElementById("txtPVentaPeso")
     let botonGuardar = document.getElementById("btnGuardar")
     const dolar = await valorDolar()
     const producto = productos.find(p => p.codigo == txtCodigo.value)
@@ -179,16 +186,12 @@ async function buscar() {
         botonGuardar.disabled = true
 
     } else {
-        nombre.value = ""
-        costoDolar.value = ""
-        costoPeso.value = ""
-        ganancia.value = ""
-        botonGuardar.disabled = false
+        limpiarProductoHTML()
     }
 
 }
 
-function guardar() {
+async function guardar() {
     const codigo = document.getElementById("txtCodigo")
     const nombre = document.getElementById("txtNombre")
     const costoDolar = document.getElementById("txtCostoDolar")
@@ -202,7 +205,6 @@ function guardar() {
     costoPeso.value.length <= 0 ? incompletos.push("COSTO EN PESO") : ""
     ganancia.value.length <= 0 ? incompletos.push("GANANCIA") : ""
 
-
     if (incompletos.length > 0) {
         //console.log(...incompletos)
         //console.log(incompletos.join(" - "));
@@ -214,13 +216,20 @@ function guardar() {
             confirmButtonText: 'Aceptar'
         })
     } else {
-        //console.log("Listo para GUARDAR")
-        botonGuardar.addEventListener("click", agregarProducto)
-        botonGuardar.addEventListener("click", cargarTabla)
-        botonGuardar.addEventListener("click", limpiarProductoHTML)
+        console.log("Listo para GUARDAR")
+        agregarProducto()
+        cargarTabla()
+        limpiarProductoHTML()
+        codigo.value = ""
     }
 
 }
+
+
+
+leerJson()
+fechaSesion()
+
 //Agrego EventListener en los dos txt para q cuando cambie el valor ingresado se autoconvierta de Peso a Dolar y Viceversa.
 let txtDolar = document.getElementById("txtCostoDolar")
 let txtPeso = document.getElementById("txtCostoPeso")
@@ -235,13 +244,9 @@ txtPeso.addEventListener("input", calcularPrecioVenta)
 txtGanancia.addEventListener("input", calcularPrecioVenta)
 
 
-leerJson()
-fechaSesion()
-
 let botonGuardar = document.getElementById("btnGuardar")
 let txtCodigo = document.getElementById("txtCodigo")
 txtCodigo.addEventListener("input", buscar)
-
 botonGuardar.addEventListener("click", guardar)
 
 
