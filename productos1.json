@@ -1,0 +1,40 @@
+[
+	{
+		"codigo": "101020",
+		"nombre": "Apple iPhone 12 Pro, 128GB, Pacific Blue",
+		"costoDolar": 929,
+		"ganancia": 40,
+		"fecha": "2022-04-03T23:58:51.326Z"
+	},
+	{
+		"codigo": "101021",
+		"nombre": "Apple iPhone 12, 128GB, Red",
+		"costoDolar": 650,
+		"ganancia": 40,
+		"fecha": "2022-04-03T23:58:51.326Z"
+	},
+	{
+		"codigo": "101022",
+		"nombre": "Apple iPhone SE 5G, 64GB, Black",
+		"costoDolar": 390,
+		"ganancia": 40,
+		"fecha": "2022-04-03T23:58:51.326Z"
+	},
+
+	{
+		"codigo": "101023",
+		"nombre": "Apple iPhone 12 Pro Max, 128GB, Graphite",
+		"costoDolar": 979,
+		"ganancia": 40,
+		"fecha": "2022-04-03T23:58:51.326Z"
+	},
+
+	{
+		"codigo": "101024",
+		"nombre": "Apple iPhone 12 Pro Max, 128GB, Pacific Blue ",
+		"costoDolar": 929,
+		"ganancia": 40,
+		"fecha": "2022-04-03T23:58:51.326Z"
+	}
+	
+]
