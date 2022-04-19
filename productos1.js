@@ -126,7 +126,7 @@ function alertOK(nombre) {
 
 
 async function valorDolar() {
-    const URL = "https://v6.exchangerate-api.com/v6/2c6d5773198e6e814665ccc0/latest/USD"
+    const URL = "https://v6.exchangerate-api.com/v6/83ca8f874af8c389d879faca/latest/USD"
     // const URL = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     const res = await fetch(URL)
     const data = await res.json()
